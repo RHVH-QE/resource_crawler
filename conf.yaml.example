@@ -1,0 +1,24 @@
+database:
+  mongourl: mongodb://[user]:[pass]@[host]/[database]?authMechanism=SCRAM-SHA-1
+  dbname: [database]
+
+crawl_conn_limit: 3
+
+log_file: /path/to/resource_crawler.log
+
+crawlers:
+  rhvh4x_img: 
+    crawler_name: rhvh4x_img_crawler
+    col_name: crawled.rhvh4x_img
+    domains: 
+    start_url: 
+    brew_root_url: 
+
+  rhvh4x_iso:
+    crawler_name: rhvh4x_iso_crawler
+    col_name: crawled.rhvh4x_iso
+    domains: 
+    start_url: 
+    iso_url_tpl: 
+
+debug: true
