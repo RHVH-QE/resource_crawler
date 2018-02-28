@@ -25,6 +25,13 @@ func init() {
 }
 
 func main() {
+	if viper.GetBool("debug") {
+		log.Warn("DEBUG MODE IS ON")
+		log.SetLevel(log.DebugLevel)
+		// do some debugging
+		return
+	}
+
 	crawlerLogFile, _ := os.Create(viper.GetString("log_file"))
 	defer crawlerLogFile.Close()
 	log.SetFormatter(&log.JSONFormatter{})
@@ -39,7 +46,9 @@ func main() {
 
 	crawlers := []cs.Crawler{
 		cs.NewRhvh4xISOCrawler(viper.GetStringMapString("crawlers.rhvh4x_iso")),
-		cs.NewRhvh4xImgCrawler(viper.GetStringMapString("crawlers.rhvh4x_img"))}
+		cs.NewRhvh4xImgCrawler(viper.GetStringMapString("crawlers.rhvh4x_img")),
+		cs.NewRhevmBuildCrawler(viper.GetStringMapString("crawlers.rhevm_build")),
+	}
 
 	var wg sync.WaitGroup
 	limit := make(chan uint, viper.GetInt("crawl_conn_limit"))
@@ -53,6 +62,7 @@ func main() {
 			if err != nil {
 				log.Error(err)
 			}
+			log.Warnf("%s is finished", c.ColName())
 			wg.Done()
 			<-limit
 		}(crawler)

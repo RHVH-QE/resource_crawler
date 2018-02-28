@@ -32,6 +32,10 @@ func (cd CrawledDatabase) SaveCrawledData(colName string, data interface{}) {
 		for _, i := range v {
 			bk.Insert(i)
 		}
+	case []cs.RhevmBuild:
+		for _, i := range v {
+			bk.Insert(i)
+		}
 	default:
 		log.Error("don't know about type %T!\n", v)
 	}
