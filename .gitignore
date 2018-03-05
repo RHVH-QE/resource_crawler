@@ -1,3 +1,4 @@
 conf.yaml
 .goreleaser.yml
 dist
+cmd/postcrawl

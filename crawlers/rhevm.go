@@ -25,17 +25,6 @@ type RhevmBuildCrawler struct {
 	RpmURL string
 }
 
-// NewRhevmBuildCrawler to init rhvh42 crawler
-func NewRhevmBuildCrawler(conf map[string]string) *RhevmBuildCrawler {
-	ret := RhevmBuildCrawler{}
-	ret.CrawlerName = conf["crawler_name"]
-	ret.CollectionName = conf["col_name"]
-	ret.AllowDomains = conf["domains"]
-	ret.StartURL = conf["start_url"]
-	ret.RpmURL = conf["rpm_url"]
-	return &ret
-}
-
 // ColName is
 func (r RhevmBuildCrawler) ColName() string {
 	return r.CollectionName

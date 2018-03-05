@@ -24,11 +24,21 @@ func init() {
 	}
 }
 
+func initCrawlers() (ret []cs.Crawler) {
+	crawlers := viper.GetStringMap("crawlers")
+	for k, v := range crawlers {
+		vv := v.(map[string]interface{})
+		if vv["enabled"] == true {
+			ret = append(ret, cs.NewCrawler(k, vv))
+		}
+	}
+	return ret
+}
+
 func main() {
 	if viper.GetBool("debug") {
 		log.Warn("DEBUG MODE IS ON")
 		log.SetLevel(log.DebugLevel)
-		// do some debugging
 		return
 	}
 
@@ -44,11 +54,7 @@ func main() {
 	defer session.Close()
 	db := dataparser.NewCrawledDatabase(session.DB(viper.GetString("database.dbname")))
 
-	crawlers := []cs.Crawler{
-		cs.NewRhvh4xISOCrawler(viper.GetStringMapString("crawlers.rhvh4x_iso")),
-		cs.NewRhvh4xImgCrawler(viper.GetStringMapString("crawlers.rhvh4x_img")),
-		cs.NewRhevmBuildCrawler(viper.GetStringMapString("crawlers.rhevm_build")),
-	}
+	crawlers := initCrawlers()
 
 	var wg sync.WaitGroup
 	limit := make(chan uint, viper.GetInt("crawl_conn_limit"))

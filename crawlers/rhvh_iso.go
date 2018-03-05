@@ -22,17 +22,6 @@ type Rhvh4xISOCrawler struct {
 	IsoURLTpl string
 }
 
-// NewRhvh4xISOCrawler to init rhvh42 crawler
-func NewRhvh4xISOCrawler(conf map[string]string) *Rhvh4xISOCrawler {
-	ret := Rhvh4xISOCrawler{}
-	ret.CrawlerName = conf["crawler_name"]
-	ret.CollectionName = conf["col_name"]
-	ret.AllowDomains = conf["domains"]
-	ret.StartURL = conf["start_url"]
-	ret.IsoURLTpl = conf["iso_url_tpl"]
-	return &ret
-}
-
 // ColName is
 func (r Rhvh4xISOCrawler) ColName() string {
 	return r.CollectionName

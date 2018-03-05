@@ -24,17 +24,6 @@ type Rhvh4xImgCrawler struct {
 	BrewRootURL string
 }
 
-// NewRhvh4xImgCrawler is
-func NewRhvh4xImgCrawler(conf map[string]string) *Rhvh4xImgCrawler {
-	ret := Rhvh4xImgCrawler{}
-	ret.CrawlerName = conf["crawler_name"]
-	ret.CollectionName = conf["col_name"]
-	ret.AllowDomains = conf["domains"]
-	ret.StartURL = conf["start_url"]
-	ret.BrewRootURL = conf["brew_root_url"]
-	return &ret
-}
-
 func (r Rhvh4xImgCrawler) getBuildName(url string) (buildName string) {
 	ret := strings.Split(url, "/")
 	buildName = ret[len(ret)-1]
