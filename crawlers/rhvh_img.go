@@ -44,7 +44,7 @@ func (r Rhvh4xImgCrawler) Crawl() (result interface{}, err error) {
 
 	c := colly.NewCollector(
 		colly.AllowedDomains(r.AllowDomains),
-		colly.CacheDir(fmt.Sprintf("/tmp/%s_cache", r.CrawlerName)),
+		// colly.CacheDir(fmt.Sprintf("/tmp/%s_cache", r.CrawlerName)),
 	)
 	c.SetRequestTimeout(time.Second * 30)
 	c.WithTransport(&http.Transport{

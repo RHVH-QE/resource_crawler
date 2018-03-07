@@ -32,7 +32,7 @@ func (r Rhvh4xISOCrawler) Crawl() (result interface{}, err error) {
 	log.Infof("crawl %s is starting", r.CrawlerName)
 	c := colly.NewCollector(
 		colly.AllowedDomains(r.AllowDomains),
-		colly.CacheDir(fmt.Sprintf("/tmp/%s_cache", r.CrawlerName)),
+		// colly.CacheDir(fmt.Sprintf("/tmp/%s_cache", r.CrawlerName)),
 	)
 	c.SetRequestTimeout(time.Second * 30)
 
