@@ -38,7 +38,7 @@ func (r Rhvh4xISOCrawler) Crawl() (result interface{}, err error) {
 
 	var res []Rhvh4xISO
 
-	pattern := regexp.MustCompile(`RHVH-4.[2-9]`)
+	pattern := regexp.MustCompile(`RHVH-4.[1-9]`)
 	c.OnHTML("a[href]", func(e *colly.HTMLElement) {
 		url := e.Attr("href")
 		if pattern.MatchString(url) {
